@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary">
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/pb_toolbar"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:indeterminate="true"
+        app:mpb_progressStyle="horizontal"
+        app:mpb_useIntrinsicPadding="false"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:src="@drawable/ic_back"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_center_appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome"
+        android:textColor="@color/default_text_view_background_color"
+        android:textSize="11pt"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/iv_back_button"
+        android:layout_toEndOf="@+id/iv_back_button"
+        android:layout_toLeftOf="@+id/iv_button_options"
+        android:layout_toStartOf="@+id/iv_button_options" />
+
+    <ImageView
+        android:id="@+id/iv_button_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="10dp"
+        android:src="@drawable/ic_menu" />
+</RelativeLayout>

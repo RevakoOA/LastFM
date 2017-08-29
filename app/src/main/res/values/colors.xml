@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Default -->
+    <color name="def_tv_txt_opt_name">#353535</color>
+    <color name="def_tv_txt_opt_val">#787C80</color>
+    <color name="default_text_view_background_color">#ffffff</color>
+    <color name="default_text_view_background_color_transparent">#88ffffff</color>
+    <color name="default_text_view_selected_background_color">#33b5e5</color>
+    <color name="default_text_view_text_color">#000000</color>
+    <color name="default_edittext_background_color">#ffffff</color>
+    <color name="default_edittext_border_color">#b2b2b2</color>
+    <color name="default_bottons_options_backgrond">#E6EDF1F2</color>
+    <color name="default_bottons_options_descriptions_backgrond">#E6FCFCFC</color>
+    <color name="default_notification_background_color">#474747</color>
+    <color name="background_clr">#55474747</color>
+
+    <color name="main_backgnd">#F8FAFB</color>
+    <color name="main_backgnd_second">#E8ECEF</color>
+    <color name="main_backgnd_darker">#A8AAAB</color>
+    <color name="main_backgnd_selected">#E5F0F8</color>
+</resources>
