@@ -3,6 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -16,9 +20,40 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+    ext {
+        compileSdkVersion = 28
+        targetSdkVersion = 28
+        buildToolsVersion = "28.0.1"
+        androidApplicationId = 'com.fernanependocejas.android10.sample.presentation'
+        androidVersionCode = 1
+        androidVersionName = "1.0"
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testApplicationId = 'com.fernandocejas.android10.sample.presentation.test'
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task runDomainUnitTests(dependsOn: [':domain:test']) {
+  description 'Run unit tests for the domain layer.'
+}
+
+task runDataUnitTests(dependsOn: [':data:cleanTestDebugUnitTest', ':data:testDebugUnitTest']) {
+  description 'Run unit tests for the data layer.'
+}
+
+task runUnitTests(dependsOn: ['runDomainUnitTests', 'runDataUnitTests']) {
+  description 'Run unit tests for both domain and data layers.'
+}
+
+task runAcceptanceTests(dependsOn: [':presentation:connectedAndroidTest']) {
+  description 'Run application acceptance tests.'
+}
+
