@@ -25,7 +25,7 @@ class ArtistsViewModel
 
     var artists: MutableLiveData<List<ArtistPosterModel>> = MutableLiveData()
 
-    fun loadArtists() = getArtists("Ukraine") { it.either(::handleFailure, ::handleArtistList) }
+    fun loadArtists(country: String) = getArtists(country) { it.either(::handleFailure, ::handleArtistList) }
 
     private fun handleArtistList(artists: TopArtists) {
         this.artists.value = artists.artists.map { ArtistPosterModel(it.mbid, it.name, it.image.get(3).url) }

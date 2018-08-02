@@ -31,8 +31,9 @@ import com.just_me.just_we.lastfmclient.core.extension.observe
 import com.just_me.just_we.lastfmclient.core.extension.viewModel
 import com.just_me.just_we.lastfmclient.core.extension.visible
 import com.just_me.just_we.lastfmclient.core.navigation.Navigator
-import kotlinx.android.synthetic.main.fragment_artists.emptyView
-import kotlinx.android.synthetic.main.fragment_artists.movieList
+import com.just_me.just_we.lastfmclient.core.utils.getJsonFromRaw
+import kotlinx.android.synthetic.main.fragment_artists.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class ArtistsFragment : BaseFragment() {
@@ -56,12 +57,30 @@ class ArtistsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeView()
+        initializeDrawerContent()
+        initializeViewContent()
         loadArtistList()
     }
 
+    private fun initializeDrawerContent() {
+        // get country list
+        val list = getJsonFromRaw(R.raw.coutry_list, resources)
+        val menu = nvCountries.menu
+        for (item in list) {
+            menu.add(item.name)
+        }
+        nvCountries.invalidate()
+        // end get country list
 
-    private fun initializeView() {
+
+        nvCountries.setNavigationItemSelectedListener {
+            dlRoot.closeDrawer(nvCountries)
+            loadArtistList(it.title.toString())
+            true
+        }
+    }
+
+    private fun initializeViewContent() {
         movieList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         movieList.adapter = artistsAdapter
         artistsAdapter.clickListener = { artist, navigationExtras ->
@@ -69,10 +88,15 @@ class ArtistsFragment : BaseFragment() {
     }
 
     private fun loadArtistList() {
+        loadArtistList("Ukraine")
+    }
+
+    private fun loadArtistList(country: String) {
+        activity.let { this.toolbar?.title = "$country's top" }
         emptyView.invisible()
         movieList.visible()
         showProgress()
-        artistsViewModel.loadArtists()
+        artistsViewModel.loadArtists(country)
     }
 
     private fun renderArtistsList(artistPosters: List<ArtistPosterModel>?) {

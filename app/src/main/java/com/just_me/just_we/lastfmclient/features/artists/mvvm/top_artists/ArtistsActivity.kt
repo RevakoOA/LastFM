@@ -17,6 +17,7 @@ package com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
 
 class ArtistsActivity : BaseActivity() {
