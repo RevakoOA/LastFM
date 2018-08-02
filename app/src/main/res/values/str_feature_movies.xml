@@ -1,0 +1,7 @@
+<resources>
+    <string name="artists_screen_title">Artists</string>
+    <string name="artist_details_screen_title">Artist Details</string>
+
+    <!-- Animations -->
+    <string name="artist_transition_poster">artistPosterTransition</string>
+</resources>
