@@ -1,43 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dlRoot"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movieList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:layout_margin="3dp"
+        android:background="@color/colorAccent" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/movieList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:background="@color/colorAccent" />
-
-        <ImageView
-            android:id="@+id/emptyView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="160dp"
-            android:scaleType="center"
-            android:src="@mipmap/ic_batman"
-            android:visibility="gone" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nvCountries"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@drawable/background_menu"
-        android:minWidth="100dp"
-        app:itemTextColor="@color/colorTextPrimary"
-        app:menu="@menu/country_list_menu">
+        android:paddingBottom="160dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_batman"
+        android:visibility="gone" />
 
-    </android.support.design.widget.NavigationView>
-</android.support.v4.widget.DrawerLayout>
+</android.support.constraint.ConstraintLayout>

@@ -36,6 +36,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="CustomExtendedTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:shadowColor">@android:drawable/screen_background_dark_transparent</item>
+    </style>
+
     <style name="ArtistPoster">
         <item name="android:layout_width">match_parent</item>
         <item name="android:scaleType">centerCrop</item>

@@ -93,6 +93,8 @@ dependencies {
     implementation applicationDependencies.retrofitGson
     implementation applicationDependencies.retrofitAdapter
     implementation applicationDependencies.okhttpLoggingInterceptor
+    implementation applicationDependencies.hTextViewBase
+    implementation applicationDependencies.hTextView
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin

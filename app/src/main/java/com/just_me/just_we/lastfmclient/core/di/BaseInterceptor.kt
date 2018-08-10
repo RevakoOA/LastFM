@@ -14,7 +14,7 @@ class BaseInterceptor @Inject constructor(@Named(API_KEY) val apiKey: String, @N
                 ?.addQueryParameter("api_key", apiKey)
                 ?.addQueryParameter("format", format)
                 ?.build()
-        request = request?.newBuilder()?.url(url)?.build()
+        url?.let { request = request?.newBuilder()?.url(it)?.build() }
         return chain?.proceed(request)
     }
 }

@@ -18,7 +18,13 @@ package com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
+import android.view.Menu
+import com.just_me.just_we.lastfmclient.R
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
+import com.just_me.just_we.lastfmclient.core.utils.getJsonFromRaw
+import kotlinx.android.synthetic.main.activity_artists.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class ArtistsActivity : BaseActivity() {
 
@@ -26,5 +32,41 @@ class ArtistsActivity : BaseActivity() {
         fun callingIntent(context: Context) = Intent(context, ArtistsActivity::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_artists)
+        addFragment(savedInstanceState)
+    }
+
     override fun fragment() = ArtistsFragment()
+
+
+    override fun onStart() {
+        super.onStart()
+        initializeDrawerContent()
+    }
+
+    private fun initializeDrawerContent() {
+        // get country list
+        val list = getJsonFromRaw(R.raw.coutry_list, resources)
+        val menu = nvCountries.menu
+        for (item in list) {
+            val menuItem = menu.add(R.id.gCountries, Menu.NONE, 0, item.name)
+            if (item.name == "Ukraine") {
+                menuItem.isChecked = true
+            }
+
+        }
+        nvCountries.invalidate()
+        // end get country list
+
+
+        nvCountries.setNavigationItemSelectedListener {
+            dlRoot.closeDrawer(GravityCompat.START)
+            val country = it.title.toString()
+            tvTitle?.animateText("Top in $country")
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ArtistsFragment)?.loadArtistList(country)
+            true
+        }
+    }
 }

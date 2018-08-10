@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movieDetails"
+    android:background="@color/colorAccent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="50dp"
+    android:paddingTop="25dp"
+    android:visibility="visible">
+
+    <TextView
+        style="@style/ArtistDetailsTitle"
+        android:text="@string/artist_tags_list_title" />
+
+    <TextView
+        android:id="@+id/tvTags"
+        style="@style/ArtistDetailsText" />
+
+    <TextView
+        style="@style/ArtistDetailsTitle"
+        android:text="@string/artist_summary_title" />
+
+    <TextView
+        android:id="@+id/tvSummary"
+        style="@style/ArtistDetailsText" />
+
+    <TextView
+        style="@style/ArtistDetailsTitle"
+        android:text="@string/artist_url_title" />
+
+    <TextView
+        android:id="@+id/tvUrl"
+        style="@style/ArtistDetailsText" />
+
+    <TextView
+        style="@style/ArtistDetailsTitle"
+        android:text="@string/artist_year_title" />
+
+    <TextView
+        android:id="@+id/tvYear"
+        style="@style/ArtistDetailsText" />
+
+</LinearLayout>

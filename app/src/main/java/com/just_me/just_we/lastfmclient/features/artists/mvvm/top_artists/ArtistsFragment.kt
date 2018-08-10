@@ -18,9 +18,11 @@ package com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.Menu
 import android.view.View
 import com.just_me.just_we.lastfmclient.core.platform.BaseFragment
 import com.just_me.just_we.lastfmclient.R
+import com.just_me.just_we.lastfmclient.R.id.nvCountries
 import com.just_me.just_we.lastfmclient.features.artists.ArtistFailure.ListNotAvailable
 import com.just_me.just_we.lastfmclient.core.exception.Failure
 import com.just_me.just_we.lastfmclient.core.exception.Failure.NetworkConnection
@@ -34,6 +36,7 @@ import com.just_me.just_we.lastfmclient.core.navigation.Navigator
 import com.just_me.just_we.lastfmclient.core.utils.getJsonFromRaw
 import kotlinx.android.synthetic.main.fragment_artists.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 import javax.inject.Inject
 
 class ArtistsFragment : BaseFragment() {
@@ -57,27 +60,8 @@ class ArtistsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeDrawerContent()
         initializeViewContent()
         loadArtistList()
-    }
-
-    private fun initializeDrawerContent() {
-        // get country list
-        val list = getJsonFromRaw(R.raw.coutry_list, resources)
-        val menu = nvCountries.menu
-        for (item in list) {
-            menu.add(item.name)
-        }
-        nvCountries.invalidate()
-        // end get country list
-
-
-        nvCountries.setNavigationItemSelectedListener {
-            dlRoot.closeDrawer(nvCountries)
-            loadArtistList(it.title.toString())
-            true
-        }
     }
 
     private fun initializeViewContent() {
@@ -87,12 +71,11 @@ class ArtistsFragment : BaseFragment() {
                     navigator.showArtistDetails(activity!!, artist, navigationExtras) }
     }
 
-    private fun loadArtistList() {
+    public fun loadArtistList() {
         loadArtistList("Ukraine")
     }
 
-    private fun loadArtistList(country: String) {
-        activity.let { this.toolbar?.title = "$country's top" }
+    public fun loadArtistList(country: String) {
         emptyView.invisible()
         movieList.visible()
         showProgress()

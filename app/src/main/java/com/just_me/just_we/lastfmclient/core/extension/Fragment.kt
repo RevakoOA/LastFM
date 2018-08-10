@@ -25,7 +25,7 @@ import android.support.v4.app.FragmentTransaction
 import android.view.View
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
 import com.just_me.just_we.lastfmclient.core.platform.BaseFragment
-import kotlinx.android.synthetic.main.activity_layout.fragmentContainer
+import kotlinx.android.synthetic.main.activity_base.fragmentContainer
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
         beginTransaction().func().commit()

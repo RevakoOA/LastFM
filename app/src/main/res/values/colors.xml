@@ -8,4 +8,15 @@
     <color name="colorTextSecondary">#7f1a18</color>
 
     <color name="translucentBackground">#ED000000</color>
+    <color name="colorMenuSelector">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:color="@color/colorSecondary" android:state_checked="true" />
+            <item android:color="@color/colorTextPrimary" />
+        </selector>
+    </color>
+
+    <color name="translucent_scrim_top">#AA000000</color>
+    <color name="translucent_scrim_top_center">#88000000</color>
+    <color name="translucent_scrim_bottom">#FF000000</color>
+    <color name="translucent_scrim_bottom_center">#AA000000</color>
 </resources>

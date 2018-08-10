@@ -17,10 +17,18 @@ package com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import com.just_me.just_we.lastfmclient.R
+import com.just_me.just_we.lastfmclient.core.extension.loadFromUrl
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
 import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.ArtistPosterModel
+import kotlinx.android.synthetic.main.activity_artist_details.*
+
 
 class ArtistDetailsActivity : BaseActivity() {
+
+    lateinit var artistPosterModel: ArtistPosterModel
 
     companion object {
         private const val INTENT_EXTRA_PARAM_ARTIST = "com.just_me.INTENT_PARAM_ARTIST"
@@ -32,5 +40,19 @@ class ArtistDetailsActivity : BaseActivity() {
         }
     }
 
-    override fun fragment() = ArtistDetailsFragment.forArtist(intent.getParcelableExtra(INTENT_EXTRA_PARAM_ARTIST))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        artistPosterModel = intent.getParcelableExtra(INTENT_EXTRA_PARAM_ARTIST)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_artist_details)
+        setSupportActionBar(toolbar)
+        addFragment(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        ivArtistPoster.loadFromUrl(artistPosterModel.posterUrl)
+        ctTitle.title = artistPosterModel.name
+    }
+
+    override fun fragment() = ArtistDetailsFragment.forArtist(artistPosterModel)
 }

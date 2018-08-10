@@ -21,15 +21,15 @@ import com.just_me.just_we.lastfmclient.R
 import com.just_me.just_we.lastfmclient.core.exception.Failure
 import com.just_me.just_we.lastfmclient.core.exception.Failure.NetworkConnection
 import com.just_me.just_we.lastfmclient.core.exception.Failure.ServerError
-import com.just_me.just_we.lastfmclient.core.extension.*
+import com.just_me.just_we.lastfmclient.core.extension.close
+import com.just_me.just_we.lastfmclient.core.extension.failure
+import com.just_me.just_we.lastfmclient.core.extension.observe
+import com.just_me.just_we.lastfmclient.core.extension.viewModel
 import com.just_me.just_we.lastfmclient.core.platform.BaseFragment
 import com.just_me.just_we.lastfmclient.entity.Artist
-import com.just_me.just_we.lastfmclient.entity.ArtistDetails
 import com.just_me.just_we.lastfmclient.features.artists.ArtistFailure.NonExistentArtist
 import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.ArtistPosterModel
-import kotlinx.android.synthetic.main.fragment_movie_details.*
-import kotlinx.android.synthetic.main.toolbar.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_artist_details.*
 
 class ArtistDetailsFragment : BaseFragment() {
 
@@ -46,17 +46,13 @@ class ArtistDetailsFragment : BaseFragment() {
         }
     }
 
-    @Inject
-    lateinit var artistDetailsAnimator: ArtistDetailsAnimator
-
     private lateinit var artistDetailsViewModel: ArtistDetailsViewModel
 
-    override fun layoutId() = R.layout.fragment_movie_details
+    override fun layoutId() = R.layout.fragment_artist_details
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        activity?.let { artistDetailsAnimator.postponeEnterTransition(it) }
 
         artistDetailsViewModel = viewModel(viewModelFactory) {
             observe(artistDetails) { renderArtistDetails(it ?: Artist()) }
@@ -68,37 +64,17 @@ class ArtistDetailsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         if (firstTimeCreated(savedInstanceState)) {
             artistDetailsViewModel.loadArtistDetails((arguments?.get(PARAM_ARTIST) as ArtistPosterModel).name)
-        } else {
-            artistDetailsAnimator.scaleUpView(moviePlay)
-            artistDetailsAnimator.cancelTransition(artistPoster)
-            artistPoster.loadFromUrl((arguments!![PARAM_ARTIST] as ArtistPosterModel).posterUrl)
         }
     }
 
     override fun onBackPressed() {
-        artistDetailsAnimator.fadeInvisible(scrollView, movieDetails)
-        if (moviePlay.isVisible())
-            artistDetailsAnimator.scaleDownView(moviePlay)
-        else
-            artistDetailsAnimator.cancelTransition(artistPoster)
     }
 
     private fun renderArtistDetails(artist: Artist) {
-        with(artist) {
-            activity.let {
-                if (image.isNotEmpty()) {
-                    artistPoster.loadUrlAndPostponeEnterTransition(image[image.size-1].url, it!!)
-                }
-                it?.toolbar?.title = artist.name
-            }
-            tvSummary.text = artist.bio.summary
-            tvTags.text = artist.tags.tag.map { it.name }.joinToString()
-            tvYear.text = artist.bio.published
-            tvUrl.text = artist.url
-//                moviePlay.setOnClickListener { artistDetailsViewModel.playMovie(trailer) }
-        }
-        artistDetailsAnimator.fadeVisible(scrollView, movieDetails)
-        artistDetailsAnimator.scaleUpView(moviePlay)
+        tvSummary.text = artist.bio.summary
+        tvTags.text = artist.tags.tag.map { it.name }.joinToString()
+        tvYear.text = artist.bio.published
+        tvUrl.text = artist.url
     }
 
     private fun handleFailure(failure: Failure?) {
@@ -115,3 +91,4 @@ class ArtistDetailsFragment : BaseFragment() {
         }
     }
 }
+

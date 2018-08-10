@@ -19,6 +19,7 @@ ext {
   javaxInject_version = '1'
   retrofit_version = '2.4.0'
   okhttp_logging_interceptor_version = '3.8.1'
+  htextview_version = '0.1.6'
 
   //Unit Testing
   robolectric_version = '3.8'
@@ -53,6 +54,8 @@ ext {
           retrofitGson:               "com.squareup.retrofit2:converter-gson:$retrofit_version",
           retrofitAdapter:            "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
           okhttpLoggingInterceptor:   "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version",
+          hTextViewBase:              "com.hanks:htextview-base:$htextview_version",
+          hTextView:                  "com.hanks:htextview-typer:$htextview_version"
 
 
   ]
