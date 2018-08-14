@@ -1,5 +1,5 @@
 
-Application that used LastFM API to show information about artists their albums and songs.
+Application that used LastFM API to show information about popular artists in choosen country, their albums and songs.
 
 # 3d party
 Used 3-rd party libraries
