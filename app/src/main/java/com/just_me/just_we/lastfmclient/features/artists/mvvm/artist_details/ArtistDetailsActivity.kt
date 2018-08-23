@@ -18,17 +18,20 @@ package com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import com.just_me.just_we.lastfmclient.R
 import com.just_me.just_we.lastfmclient.core.extension.loadFromUrl
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsActivityComponent
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsActivityModule
 import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.ArtistPosterModel
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityComponent
 import kotlinx.android.synthetic.main.activity_artist_details.*
 
 
-class ArtistDetailsActivity : BaseActivity() {
+class ArtistDetailsActivity : BaseActivity(), ArtistDetailsContract.ActivityView {
 
     lateinit var artistPosterModel: ArtistPosterModel
+    lateinit var artistsActivityComponent: ArtistDetailsActivityComponent
 
     companion object {
         private const val INTENT_EXTRA_PARAM_ARTIST = "com.just_me.INTENT_PARAM_ARTIST"
@@ -41,6 +44,7 @@ class ArtistDetailsActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        artistsActivityComponent = appComponent.getArtistDetailsActivityComponent((ArtistDetailsActivityModule(this)))
         artistPosterModel = intent.getParcelableExtra(INTENT_EXTRA_PARAM_ARTIST)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artist_details)

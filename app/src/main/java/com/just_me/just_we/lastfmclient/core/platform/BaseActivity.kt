@@ -17,18 +17,25 @@ package com.just_me.just_we.lastfmclient.core.platform
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.just_me.just_we.lastfmclient.AndroidApplication
 import com.just_me.just_we.lastfmclient.R.id
 import com.just_me.just_we.lastfmclient.R.layout
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityComponent
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationComponent
 import com.just_me.just_we.lastfmclient.core.extension.inTransaction
 import kotlinx.android.synthetic.main.toolbar.toolbar
 
 /**
- * Base Activity class with helper methods for handling fragment transactions and back button
+ * Base ArtistDetailsActivity class with helper methods for handling fragment transactions and back button
  * events.
  *
  * @see AppCompatActivity
  */
 abstract class BaseActivity : AppCompatActivity() {
+
+    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
+        (this.application as AndroidApplication).appComponent
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

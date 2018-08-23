@@ -18,7 +18,7 @@ package com.just_me.just_we.lastfmclient.core.navigation
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.just_me.just_we.lastfmclient.AndroidApplication
-import com.just_me.just_we.lastfmclient.core.di.ApplicationComponent
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationComponent
 import javax.inject.Inject
 
 class RouteActivity : AppCompatActivity() {

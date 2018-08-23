@@ -16,10 +16,12 @@
 package com.just_me.just_we.lastfmclient
 
 import android.app.Application
-import com.just_me.just_we.lastfmclient.core.di.ApplicationComponent
-import com.just_me.just_we.lastfmclient.core.di.ApplicationModule
-import com.just_me.just_we.lastfmclient.core.di.DaggerApplicationComponent
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationComponent
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationModule
+import com.just_me.just_we.lastfmclient.core.di.app.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 class AndroidApplication : Application() {
 
@@ -41,4 +43,11 @@ class AndroidApplication : Application() {
     private fun initializeLeakDetection() {
         if (BuildConfig.DEBUG) LeakCanary.install(this)
     }
+
+//    private fun initRealmConfiguration() {
+//        val realmConfiguration = RealmConfiguration.Builder(this)
+//                .deleteRealmIfMigrationNeeded()
+//                .build()
+//        Realm.setDefaultConfiguration(realmConfiguration)
+//    }
 }

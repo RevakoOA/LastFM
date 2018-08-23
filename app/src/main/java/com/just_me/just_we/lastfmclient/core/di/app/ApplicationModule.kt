@@ -13,26 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.just_me.just_we.lastfmclient.core.di
+package com.just_me.just_we.lastfmclient.core.di.app
 
 import android.content.Context
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.just_me.just_we.lastfmclient.BuildConfig
 import com.just_me.just_we.lastfmclient.features.artists.ArtistsRepository
 import com.just_me.just_we.lastfmclient.AndroidApplication
+import com.just_me.just_we.lastfmclient.core.utils.network.BaseInterceptor
 import com.just_me.just_we.lastfmclient.entity.Artist
 import com.just_me.just_we.lastfmclient.entity.ArtistDetailsDeserialization
 import com.just_me.just_we.lastfmclient.entity.TopArtists
 import com.just_me.just_we.lastfmclient.entity.TopArtistsDeserialization
-import com.just_me.just_we.lastfmclient.features.artists.ArtistsApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 

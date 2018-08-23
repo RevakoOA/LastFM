@@ -26,7 +26,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.just_me.just_we.lastfmclient.AndroidApplication
 import com.just_me.just_we.lastfmclient.R.color
-import com.just_me.just_we.lastfmclient.core.di.ApplicationComponent
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityComponent
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationComponent
 import com.just_me.just_we.lastfmclient.core.extension.appContext
 import com.just_me.just_we.lastfmclient.core.extension.viewContainer
 import kotlinx.android.synthetic.main.toolbar.progress

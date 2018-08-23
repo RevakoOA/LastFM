@@ -23,16 +23,24 @@ import android.view.Menu
 import com.just_me.just_we.lastfmclient.R
 import com.just_me.just_we.lastfmclient.core.platform.BaseActivity
 import com.just_me.just_we.lastfmclient.core.utils.getJsonFromRaw
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityComponent
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityModule
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artistsBaseContract.BasePresenter.ArtistsContract
 import kotlinx.android.synthetic.main.activity_artists.*
 import kotlinx.android.synthetic.main.toolbar.*
+import javax.inject.Inject
 
-class ArtistsActivity : BaseActivity() {
+class ArtistsActivity : BaseActivity(), ArtistsContract.ActivityView {
+
+    @Inject lateinit var artistsPresenter: ArtistsContract.Presenter
+    lateinit var artistsActivityComponent: ArtistsActivityComponent
 
     companion object {
         fun callingIntent(context: Context) = Intent(context, ArtistsActivity::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        artistsActivityComponent = appComponent.getArtistsActivityComponent(ArtistsActivityModule(this))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artists)
         addFragment(savedInstanceState)
@@ -65,7 +73,7 @@ class ArtistsActivity : BaseActivity() {
             dlRoot.closeDrawer(GravityCompat.START)
             val country = it.title.toString()
             tvTitle?.animateText("Top in $country")
-            (supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ArtistsFragment)?.loadArtistList(country)
+            artistsPresenter.loadArtistsList(country)
             true
         }
     }

@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.just_me.just_we.lastfmclient.core.di
+package com.just_me.just_we.lastfmclient.core.di.app
 
-import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.ArtistDetailsFragment
-import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.ArtistsFragment
 import com.just_me.just_we.lastfmclient.core.navigation.RouteActivity
 import com.just_me.just_we.lastfmclient.AndroidApplication
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityComponent
 import com.just_me.just_we.lastfmclient.core.di.viewmodel.ViewModelModule
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsActivityComponent
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsActivityModule
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.di.ArtistsActivityModule
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
+@Component(modules = [ApplicationModule::class, ViewModelModule::class, RealmModule::class])
 interface ApplicationComponent {
     fun inject(target: AndroidApplication)
     fun inject(target: RouteActivity)
-
-    fun inject(target: ArtistsFragment)
-    fun inject(target: ArtistDetailsFragment)
+    fun getArtistsActivityComponent(activityModule: ArtistsActivityModule): ArtistsActivityComponent
+    fun getArtistDetailsActivityComponent(activityModule: ArtistDetailsActivityModule): ArtistDetailsActivityComponent
 }

@@ -28,10 +28,14 @@ import com.just_me.just_we.lastfmclient.core.extension.viewModel
 import com.just_me.just_we.lastfmclient.core.platform.BaseFragment
 import com.just_me.just_we.lastfmclient.entity.Artist
 import com.just_me.just_we.lastfmclient.features.artists.ArtistFailure.NonExistentArtist
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsFragmentComponent
+import com.just_me.just_we.lastfmclient.features.artists.mvvm.artist_details.di.ArtistDetailsFragmentModule
 import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.ArtistPosterModel
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 
-class ArtistDetailsFragment : BaseFragment() {
+class ArtistDetailsFragment : BaseFragment(), ArtistDetailsContract.FragmentView {
+
+    lateinit var fragmentComponent: ArtistDetailsFragmentComponent
 
     companion object {
         private const val PARAM_ARTIST = "param_artist"
@@ -52,8 +56,10 @@ class ArtistDetailsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
+        fragmentComponent = (activity as ArtistDetailsActivity).artistsActivityComponent.getFragmentComponent(ArtistDetailsFragmentModule(this))
+        fragmentComponent.inject(this)
+        fragmentComponent.inject(activity as ArtistDetailsActivity)
         artistDetailsViewModel = viewModel(viewModelFactory) {
             observe(artistDetails) { renderArtistDetails(it ?: Artist()) }
             failure(failure, ::handleFailure)

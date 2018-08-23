@@ -1,7 +1,7 @@
-package com.just_me.just_we.lastfmclient.core.di
+package com.just_me.just_we.lastfmclient.core.utils.network
 
-import com.just_me.just_we.lastfmclient.core.di.ApplicationModule.Companion.API_KEY
-import com.just_me.just_we.lastfmclient.core.di.ApplicationModule.Companion.FORMAT
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationModule.Companion.API_KEY
+import com.just_me.just_we.lastfmclient.core.di.app.ApplicationModule.Companion.FORMAT
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
