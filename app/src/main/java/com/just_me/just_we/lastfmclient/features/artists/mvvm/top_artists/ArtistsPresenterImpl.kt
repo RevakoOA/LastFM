@@ -12,6 +12,7 @@ class ArtistsPresenterImpl constructor(val activityView: ArtistsContract.Activit
         fragmentView.showEmptyView(false)
         fragmentView.showArtistsList(true)
         fragmentView.showProgress(true)
+        activityView.setTopInCountry(country)
         fragmentView.loadArtistsList(country)
     }
 

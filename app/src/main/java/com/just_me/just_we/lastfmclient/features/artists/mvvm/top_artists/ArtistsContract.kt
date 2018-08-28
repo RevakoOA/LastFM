@@ -6,7 +6,7 @@ import com.just_me.just_we.lastfmclient.features.artists.mvvm.top_artists.Artist
 interface ArtistsContract {
 
     interface ActivityView {
-
+        fun setTopInCountry(country: String)
     }
 
     interface FragmentView {

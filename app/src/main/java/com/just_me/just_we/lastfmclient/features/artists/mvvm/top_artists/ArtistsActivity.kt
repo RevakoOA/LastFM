@@ -39,6 +39,10 @@ class ArtistsActivity : BaseActivity(), ArtistsContract.ActivityView {
         fun callingIntent(context: Context) = Intent(context, ArtistsActivity::class.java)
     }
 
+    override fun setTopInCountry(country: String) {
+        tvTitle?.animateText("Top in $country")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         artistsActivityComponent = appComponent.getArtistsActivityComponent(ArtistsActivityModule(this))
         super.onCreate(savedInstanceState)
@@ -52,6 +56,7 @@ class ArtistsActivity : BaseActivity(), ArtistsContract.ActivityView {
     override fun onStart() {
         super.onStart()
         initializeDrawerContent()
+
     }
 
     private fun initializeDrawerContent() {
@@ -72,7 +77,7 @@ class ArtistsActivity : BaseActivity(), ArtistsContract.ActivityView {
         nvCountries.setNavigationItemSelectedListener {
             dlRoot.closeDrawer(GravityCompat.START)
             val country = it.title.toString()
-            tvTitle?.animateText("Top in $country")
+            setTopInCountry(country)
             artistsPresenter.loadArtistsList(country)
             true
         }

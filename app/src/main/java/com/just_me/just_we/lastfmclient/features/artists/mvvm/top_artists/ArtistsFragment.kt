@@ -47,7 +47,6 @@ class ArtistsFragment : BaseFragment(), ArtistsContract.FragmentView {
     override fun showEmptyView(b: Boolean) {
         emptyView.visibility = if (b) VISIBLE else GONE
         artistList.visibility = if (b) GONE else VISIBLE
-
     }
 
     override fun showArtistsList(b: Boolean) {
@@ -78,7 +77,7 @@ class ArtistsFragment : BaseFragment(), ArtistsContract.FragmentView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeViewContent()
-        artistsPresenter.loadArtistsList("Ukraine")
+        artistsPresenter.loadArtistsList(artistsViewModel.country.value!!)
     }
 
     private fun initializeViewContent() {
@@ -105,6 +104,6 @@ class ArtistsFragment : BaseFragment(), ArtistsContract.FragmentView {
         artistList.invisible()
         emptyView.visible()
         hideProgress()
-        notifyWithAction(message, R.string.action_refresh) {artistsPresenter.loadArtistsList("Ukraine")}
+        notifyWithAction(message, R.string.action_refresh) {artistsPresenter.loadArtistsList(artistsViewModel.country.value!!)}
     }
 }

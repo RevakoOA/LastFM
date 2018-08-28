@@ -24,10 +24,20 @@ class ArtistsViewModel
 @Inject constructor(private val getArtists: GetArtists) : BaseViewModel() {
 
     var artists: MutableLiveData<List<ArtistPosterModel>> = MutableLiveData()
+    var country: MutableLiveData<String> = MutableLiveData()
 
-    fun loadArtists(country: String) = getArtists(country) { it.either(::handleFailure, ::handleArtistList) }
-
-    private fun handleArtistList(artists: TopArtists) {
-        this.artists.value = artists.artists.map { ArtistPosterModel(it.mbid, it.name, it.image.get(3).url) }
+    init {
+        if (country.value.isNullOrEmpty()) {
+            country.value = "Ukraine"
+        }
     }
-}
+
+    fun loadArtists(country: String) {
+        this.country.value = country
+        getArtists(country) { it.either(::handleFailure, ::handleArtistList) }
+    }
+
+        private fun handleArtistList(artists: TopArtists) {
+            this.artists.value = artists.artists.map { ArtistPosterModel(it.mbid, it.name, it.image.get(3).url) }
+        }
+    }
